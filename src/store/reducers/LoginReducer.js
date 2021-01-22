@@ -1,7 +1,7 @@
 import { LOGIN_USER } from "../constants";
 
 const initialState = {
-  user: {},
+  user: [],
 };
 
 export default (state = initialState, action) => {

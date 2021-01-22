@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/actions/LoginActions";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [input, setInput] = useState({
@@ -9,7 +10,8 @@ export default function Login() {
   });
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Login.user);
-  console.log(users);
+  const history = useHistory();
+
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -19,10 +21,16 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(input));
-    setInput({
-      [e.target.name]: "",
-    });
+    await dispatch(loginUser(input));
+    if (users) {
+      setInput({
+        email: "",
+        password: "",
+      });
+      history.push("/home");
+    } else {
+      alert("Algo salio mal");
+    }
   };
 
   return (
