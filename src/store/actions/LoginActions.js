@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "../constants";
+import { ERROR_LOGIN_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
 import Axios from "axios";
 
 export const loginUser = (value) => {
@@ -12,7 +12,24 @@ export const loginUser = (value) => {
         });
       }
     } catch (error) {
-      alert(error);
+      dispatch({
+        type: ERROR_LOGIN_USER,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    const result = await Axios.get("http://localhost:3001/user/logout");
+    if (result) {
+      dispatch({
+        type: LOGOUT_USER,
+        payload: result,
+      });
+    } else {
+      console.log("Algo salio mal");
     }
   };
 };

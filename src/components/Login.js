@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/actions/LoginActions";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [input, setInput] = useState({
@@ -9,7 +10,9 @@ export default function Login() {
     password: "",
   });
   const dispatch = useDispatch();
+  // const messages = useSelector((state) => state.Login.message);
   const users = useSelector((state) => state.Login.user);
+
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -23,14 +26,12 @@ export default function Login() {
     e.preventDefault();
     await dispatch(loginUser(input));
     if (users) {
-      setInput({
-        email: "",
-        password: "",
-      });
       history.push("/home");
-    } else {
-      alert("Algo salio mal");
     }
+    setInput({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -94,12 +95,12 @@ export default function Login() {
             </div>
 
             <div className="text-sm">
-              <a
-                href="#"
+              <Link
+                to="/register"
                 className="font-medium text-gray-600 hover:text-gray-500"
               >
-                Forgot your password?
-              </a>
+                Sing up
+              </Link>
             </div>
           </div>
 
