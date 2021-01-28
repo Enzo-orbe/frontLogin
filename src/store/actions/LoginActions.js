@@ -5,14 +5,16 @@ export const loginUser = (value) => {
   return async (dispatch) => {
     const result = await Axios.post("http://localhost:3001/user/login", value);
     try {
+      console.log(result);
       if (result) {
-        dispatch({
+        await dispatch({
           type: LOGIN_USER,
           payload: result,
         });
       }
     } catch (error) {
-      dispatch({
+      console.log(error);
+      await dispatch({
         type: ERROR_LOGIN_USER,
         payload: error,
       });

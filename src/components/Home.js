@@ -44,7 +44,7 @@ export default function Home() {
                     <Link to="/home">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-25 w-25 sm:h-20"
+                        className="h-10 w-10 sm:h-25"
                         src="https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
                         alt="test"
                       />
