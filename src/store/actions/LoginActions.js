@@ -1,26 +1,24 @@
 import { ERROR_LOGIN_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
 import Axios from "axios";
 
-export const loginUser = (value) => {
+export function loginUser(value) {
   return async (dispatch) => {
     const result = await Axios.post("http://localhost:3001/user/login", value);
-    try {
-      console.log(result);
-      if (result) {
-        await dispatch({
-          type: LOGIN_USER,
-          payload: result,
-        });
-      }
-    } catch (error) {
-      console.log(error);
+
+    console.log(result);
+    if (result) {
+      await dispatch({
+        type: LOGIN_USER,
+        payload: result,
+      });
+    } else {
       await dispatch({
         type: ERROR_LOGIN_USER,
-        payload: error,
+        payload: "Algo salio mal",
       });
     }
   };
-};
+}
 
 export const logoutUser = () => {
   return async (dispatch) => {

@@ -8,7 +8,7 @@ export default function Home() {
   const users = useSelector((state) => state.Login.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!users) {
+    if (!users.name) {
       history.push("/");
     }
     //     history.push("/login");
@@ -144,7 +144,7 @@ export default function Home() {
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                   <span className="block xl:inline">
-                    Bienvenido {users.user.name}
+                    Bienvenido {users.name}
                   </span>
                 </h1>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">

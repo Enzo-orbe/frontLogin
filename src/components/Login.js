@@ -77,6 +77,7 @@ export default function Login() {
               />
             </div>
           </div>
+          <p>{users.message ? users.message : null}</p>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
