@@ -15,6 +15,9 @@ export default function Login() {
 
   const history = useHistory();
 
+  if (users.name) {
+    history.push("/home");
+  }
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -24,14 +27,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(loginUser(input));
-    if (users) {
-      history.push("/home");
-    }
-    setInput({
-      email: "",
-      password: "",
-    });
+    dispatch(loginUser(input));
   };
 
   return (
