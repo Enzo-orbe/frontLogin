@@ -1,9 +1,15 @@
-import { ERROR_LOGIN_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
+import {
+  ERROR_LOGIN_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  REGISTER_USER,
+} from "../constants";
 
 const initialState = {
   user: [],
   error: [],
   message: [],
+  register: [],
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +29,11 @@ export default (state = initialState, action) => {
         ...state,
         user: [],
         message: action.payload.data,
+      };
+    case REGISTER_USER:
+      return {
+        ...state,
+        register: action.payload,
       };
 
     default:

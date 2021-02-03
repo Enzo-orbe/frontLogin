@@ -1,6 +1,37 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../store/actions/LoginActions";
+import { useHistory } from "react-router";
 export default function Register() {
+  const [input, setInput] = useState({
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register(input));
+    setInput({
+      name: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
+    history.push("/");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-14 px-6 md:px-8 lg:px-10">
       <div className="max-w-md w-full space-y-8">
@@ -10,54 +41,54 @@ export default function Register() {
           </h1>
         </div>
         <div className="mt-5 md:mt-0 md:col-span-2 sm:rounded-md">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 bg-white sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="first_name"
+                      htmlFor="name"
                       className="block text-sm font-medium text-gray-700"
                     >
                       First name
                     </label>
                     <input
                       type="text"
-                      name="first_name"
-                      id="first_name"
-                      autocomplete="given-name"
+                      name="name"
+                      id="name"
+                      onChange={handleChange}
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="last_name"
+                      htmlFor="lastName"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Last name
                     </label>
                     <input
                       type="text"
-                      name="last_name"
-                      id="last_name"
-                      autocomplete="family-name"
+                      name="lastName"
+                      id="lastName"
+                      onChange={handleChange}
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-4">
                     <label
-                      for="email_address"
+                      htmlFor="email"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Email address
                     </label>
                     <input
-                      type="text"
-                      name="email_address"
-                      id="email_address"
-                      autocomplete="email"
+                      type="email"
+                      name="email"
+                      id="email"
+                      onChange={handleChange}
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -65,7 +96,7 @@ export default function Register() {
 
                 <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Your Password
@@ -74,6 +105,7 @@ export default function Register() {
                     type="password"
                     name="password"
                     id="password"
+                    onChange={handleChange}
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>

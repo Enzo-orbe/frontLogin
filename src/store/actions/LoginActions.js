@@ -1,4 +1,9 @@
-import { ERROR_LOGIN_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
+import {
+  ERROR_LOGIN_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  REGISTER_USER,
+} from "../constants";
 import Axios from "axios";
 
 export function loginUser(value) {
@@ -26,6 +31,23 @@ export const logoutUser = () => {
     if (result) {
       dispatch({
         type: LOGOUT_USER,
+        payload: result,
+      });
+    } else {
+      console.log("Algo salio mal");
+    }
+  };
+};
+
+export const register = (data) => {
+  return async (dispatch) => {
+    const result = await Axios.post(
+      "http://localhost:3001/user/register",
+      data
+    );
+    if (result) {
+      dispatch({
+        type: REGISTER_USER,
         payload: result,
       });
     } else {
