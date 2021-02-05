@@ -9,6 +9,7 @@ export default function Register() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,19 +23,38 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register(input));
-    setInput({
-      name: "",
-      lastName: "",
-      email: "",
-      password: "",
-    });
-    history.push("/");
+    if (!input.name || !input.lastName || !input.email || !input.password) {
+      setError(true);
+    } else {
+      dispatch(register(input));
+      setInput({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
+      history.push("/");
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-14 px-6 md:px-8 lg:px-10">
       <div className="max-w-md w-full space-y-8">
+        {error ? (
+          <div
+            style={{
+              background: "#F9836A",
+              border: "1px solid red",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <p style={{ color: "white", fontWeight: "bold" }}>
+              Todos los campos son requeridos
+            </p>
+          </div>
+        ) : null}
         <div>
           <h1 className="mt-6 mr-20 text-center text-3xl font-extrabold text-gray-900">
             Crea tu cuenta
